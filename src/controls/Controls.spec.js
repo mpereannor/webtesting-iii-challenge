@@ -12,16 +12,17 @@ afterEach(rtl.cleanup);
 let wrapper;
 
 beforeEach(() => {
-    wrapper = rtl.render(<Controls/>);
+wrapper = rtl.render(<Controls locked={false} closed={false}/>);
 })
 
 describe('Controls Component', () => {
-    it ('renders without crashing', () => {
-
-    })
-
-    it ('defaults to `unlocked` ', () => {
-
-
-    })
+    it ('matches the snapshot', () => {
+        expect(wrapper.container).toMatchSnapshot();
+    });
+    it("provides buttons to toggle the closed and locked states", () => {
+		let lockButton = wrapper.getByTestId("locked");
+		let closeButton = wrapper.getByTestId("closed");
+		expect(lockButton).toBeInTheDocument();
+		expect(closeButton).toBeInTheDocument();
+	});
 })
